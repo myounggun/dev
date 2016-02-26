@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vector - Myoung Chae</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
+
+
+선형대수학
+수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
+점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
+
+
+
+1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
+
+스칼라는 방향이 없고 크기만 가진 값이다.
+벡터는 크기와 방향을 모두 가진">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vector">
+<meta property="og:url" content="http://myounggun.github.io/dev/2016/01/03/Vector/index.html">
+<meta property="og:site_name" content="Myoung Chae">
+<meta property="og:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
+
+
+선형대수학
+수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
+점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
+
+
+
+1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
+
+스칼라는 방향이 없고 크기만 가진 값이다.
+벡터는 크기와 방향을 모두 가진">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12254936/c03c230e-b931-11e5-8268-20405fd88642.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12255944/81ec1950-b93c-11e5-95dc-4092e9d1bf88.png">
+<meta property="og:updated_time" content="2016-02-26T10:19:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vector">
+<meta name="twitter:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
+
+
+선형대수학
+수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
+점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
+
+
+
+1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
+
+스칼라는 방향이 없고 크기만 가진 값이다.
+벡터는 크기와 방향을 모두 가진">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/dev/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/dev/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/dev/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/dev/">Home</a>
+        
+          <a class="main-nav-link" href="/dev/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/dev/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/dev/tags">Tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://myounggun.github.io/dev"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Vector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vector
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/dev/2016/01/03/Vector/" class="article-date">
+  <time datetime="2016-01-03T10:12:41.000Z" itemprop="datePublished">2016-01-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/dev/categories/math/">math</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.</p>
+<p><img width="500" alt="vector-thumb" src="https://cloud.githubusercontent.com/assets/6646861/12254936/c03c230e-b931-11e5-8268-20405fd88642.png" style="margin:0;padding:0"></p>
+<ul>
+<li><strong>선형대수학</strong><ul>
+<li>수 대신 문자(대수)를 사용한 방정식과 기하학의 만남</li>
+<li>점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-스칼라와-벡터의-정의"><a href="#1-스칼라와-벡터의-정의" class="headerlink" title="1. 스칼라와 벡터의 정의"></a>1. 스칼라와 벡터의 정의</h2><p>스칼라와 벡터의 차이는 방향 유무에 있다.</p>
+<ul>
+<li>스칼라는 방향이 없고 크기만 가진 값이다.</li>
+<li>벡터는 크기와 방향을 모두 가진 값이다.</li>
+</ul>
+<h2 id="2-벡터-Orgin-carrier-gt-Latin-vector"><a href="#2-벡터-Orgin-carrier-gt-Latin-vector" class="headerlink" title="2. 벡터(Orgin: carrier -&gt; Latin: vector)"></a>2. 벡터(Orgin: carrier -&gt; Latin: vector)</h2><p>실수를 순서쌍(tuple)로 구성한 수의 체계(유리수, 무리수, 허수와 같은 수의 한 체개)  </p>
+<p><img width="500" alt="vector-carrier" src="https://cloud.githubusercontent.com/assets/6646861/12255944/81ec1950-b93c-11e5-95dc-4092e9d1bf88.png" style="margin:0;padding:0"></p>
+<h3 id="벡터의-크기와-방향"><a href="#벡터의-크기와-방향" class="headerlink" title="벡터의 크기와 방향"></a>벡터의 크기와 방향</h3><h4 id="벡터-방향"><a href="#벡터-방향" class="headerlink" title="벡터 방향"></a>벡터 방향</h4><ul>
+<li>화살표 시각화</li>
+<li>좌표 공간에 따라 2/3차원 표현</li>
+<li>같은 크기와 방향이면 동일한 벡터</li>
+<li>좌표 원점을 기준으로 점의 위치 표시</li>
+<li>벡터 = 끝점 위치 - 시작점 위치</li>
+<li><code>vec2(3-1, 4-1) = vec2(2, 3)</code></li>
+<li>벡터 = 변화 혹은 변위(시작점과 끝점 차이)</li>
+<li>0 벡터 = 변화 없음</li>
+</ul>
+<h4 id="벡터-크기"><a href="#벡터-크기" class="headerlink" title="벡터 크기"></a>벡터 크기</h4><ul>
+<li>끝점과 사작점 사이 거리 = 크기 (∥A∥)</li>
+<li>크기는 피타고라스 정리로 구함 (a^2 + b^2 = c^2)</li>
+<li><code>var dist = Math.sqrt(x*x + y*y)</code></li>
+<li>벡터 각 성분을 크기로 나누면 단위 벡터 (정규화 과정)</li>
+<li><code>(3, 4) -&gt; norm(3/5, 4/5) -&gt; (0.6, 0.8)</code></li>
+<li>단위 벡터: 방향은 그대로 크기가 1인 벡터 (방향 벡터)</li>
+<li>단위 벡터 = 벡터의 방향</li>
+<li>단위 벡터 * 스칼라(크기) = 원래 벡터</li>
+<li>단위 벡터는 벡터 방향만 구할 때 사용</li>
+<li><code>vec2(0.6*5, 0.8*5) = vec2(3, 4)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> dist = <span class="built_in">Math</span>.sqrt(x*x + y*y);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(x, y); <span class="comment">// 3, 4</span></span><br><span class="line"><span class="built_in">console</span>.log(dist); <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Normalize"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nx = x/dist;</span><br><span class="line"><span class="keyword">var</span> ny = y/dist;</span><br><span class="line"><span class="keyword">var</span> ndist = <span class="built_in">Math</span>.sqrt(nx*nx + ny*ny);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nx, ny); <span class="comment">// 0.6, 0.8</span></span><br><span class="line"><span class="built_in">console</span>.log(ndist);  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Restore"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nx*dist, ny*dist); <span class="comment">// 3, 4</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-벡터-연산"><a href="#3-벡터-연산" class="headerlink" title="3. 벡터 연산"></a>3. 벡터 연산</h2><h3 id="벡터-합"><a href="#벡터-합" class="headerlink" title="벡터 합"></a>벡터 합</h3><ul>
+<li>A, B 두 벡터 합</li>
+<li>B 시작점을 A 끝점에 연결 (반대도 가능)</li>
+<li>A 시작점과 B 끝점을 연결 (A + B)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x + B.x, A.y + B.y);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-차"><a href="#벡터-차" class="headerlink" title="벡터 차"></a>벡터 차</h3><ul>
+<li>A, B 두 벡터 차</li>
+<li>B 벡터 방향을 반대로 하고 벡터 합 (A + -B)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x - B.x, A.y - B.y);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-스칼라-곱"><a href="#벡터-스칼라-곱" class="headerlink" title="벡터 스칼라 곱"></a>벡터 스칼라 곱</h3><ul>
+<li>A 벡터 스칼라 곱</li>
+<li>벡터 크기에 영향</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x * Scalar, A.y * Scalar);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-내적-dot-product"><a href="#벡터-내적-dot-product" class="headerlink" title="벡터 내적(dot product)"></a>벡터 내적(dot product)</h3><ul>
+<li>A, B 벡터 내적 (A ● B)</li>
+<li>내적 결과는 스칼라 값(스칼라적)</li>
+<li>A, B 벡터 각 x, y 성분을 곱을 더한 결과</li>
+<li>A가 B 벡터에 투영된 길이 (B는 단위 벡터)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">스칼라 = A.x*B.x + A.y*B.y; <span class="comment">// 2차원 내적</span></span><br><span class="line">스칼라 = A.x*B.x + A.y*B.y + A.z*B.z; <span class="comment">// 3차원 내적</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>A ● B = 0, A와 B는 직교(ㅗ)</li>
+<li>A ● B &lt; 0 (음수), θ &gt; 90도 </li>
+<li>A ● B &gt; 0 (양수), θ &lt; 90도</li>
+<li>A ● B = ∥A∥∥B∥cosθ</li>
+<li>내적과 두 벡터 크기로 두 벡터 사이각 구함</li>
+</ul>
+<h3 id="벡터-외적-cross-product"><a href="#벡터-외적-cross-product" class="headerlink" title="벡터 외적(cross product)"></a>벡터 외적(cross product)</h3><ul>
+<li>A, B 벡터 외적 (A * B = C)</li>
+<li>외적 결과는 3차원 벡터 (벡터적)</li>
+<li>결과 벡터는 A, B 벡터와 직교하는 C 벡터(x,y,z)</li>
+<li>표면 법선(surface normal) 계산</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec3</span>(A.y*B.z - A.z*B.y,  <span class="comment">// x</span></span><br><span class="line">	 A.z*B.x - A.x*B.z,  <span class="comment">// y</span></span><br><span class="line">	 A.x*B.y - A.y*B.x); <span class="comment">// z</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-참고"><a href="#4-참고" class="headerlink" title="4. 참고"></a>4. 참고</h3><h5 id="네이버-지식백과-대수학-代數學-algebra"><a href="#네이버-지식백과-대수학-代數學-algebra" class="headerlink" title="네이버 지식백과 - 대수학(代數學, algebra)"></a><a href="http://terms.naver.com/entry.nhn?docId=2098120&amp;categoryId=44413&amp;cid=44413" target="_blank" rel="external">네이버 지식백과 - 대수학(代數學, algebra)</a></h5><blockquote>
+<p>대수학(代數學, algebra)은 수 대신에 문자를 사용하여 방정식의 풀이 방법이나 대수적 구조를 연구하는 학문</p>
+</blockquote>
+<h5 id="네이버-지식백과-선형대수학-線型代數學-linear-algebra"><a href="#네이버-지식백과-선형대수학-線型代數學-linear-algebra" class="headerlink" title="네이버 지식백과 - 선형대수학(線型代數學, linear algebra)"></a><a href="http://terms.naver.com/entry.nhn?docId=2164903&amp;cid=44413&amp;categoryId=44413#TABLE_OF_CONTENT2" target="_blank" rel="external">네이버 지식백과 - 선형대수학(線型代數學, linear algebra)</a></h5><blockquote>
+<p>주어진 문제들을 추상화(abstraction)시켜 복잡한 문제를 정확하고 효율적으로 해결할 수 있는 방법론</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/cross/">cross</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/dot/">dot</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/dev/2016/01/04/Matrix/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Matrix
+        
+      </div>
+    </a>
+  
+  
+    <a href="/dev/2015/12/31/Markup/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Markup&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Myoung Chae&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/dev/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/dev/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/dev/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/dev/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

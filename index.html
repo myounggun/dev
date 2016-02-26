@@ -52,7 +52,7 @@
   </div>
 </header>
     <section id="main" class="outer">
-      <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-Matrix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -60,34 +60,475 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/dev/2016/02/26/hello-world/">Hello World</a>
+      <a class="article-title" href="/dev/2016/01/04/Matrix/">Matrix</a>
     </h1>
   
 
       </header>
     
     <div class="article-meta">
-      <a href="/dev/2016/02/26/hello-world/" class="article-date">
-  <time datetime="2016-02-26T07:59:56.000Z" itemprop="datePublished">2016-02-26</time>
+      <a href="/dev/2016/01/04/Matrix/" class="article-date">
+  <time datetime="2016-01-04T10:22:31.000Z" itemprop="datePublished">2016-01-04</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/dev/categories/math/">math</a>
+  </div>
+
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>벡터에 대해 이해했다면 2D/3D 행렬, 벡터와 행렬 연산, 아핀 변환에 대해 알아보자.  </p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12264019/0aa91efc-b977-11e5-83a0-529b1f59b427.png" width="500" style="margin:0;padding:0"></p>
+<h2 id="1-Matrix2D"><a href="#1-Matrix2D" class="headerlink" title="1. Matrix2D"></a>1. Matrix2D</h2><p>3D 프로그래밍에서 벡터와 행렬에 대한 이해는 필수입니다.<br>객체의 2D 변환(이동, 크기조절, 회전, 기울리기)에 대해 살펴볼께요.<br>보통 ‘아핀 변환’이라고 불리우는 중요한 개념입니다.</p>
+<h3 id="A-벡터의-행렬-표현"><a href="#A-벡터의-행렬-표현" class="headerlink" title="A. 벡터의 행렬 표현"></a>A. 벡터의 행렬 표현</h3><hr>
+<h4 id="행행렬-row-matrix-행벡터"><a href="#행행렬-row-matrix-행벡터" class="headerlink" title="행행렬(row matrix) = 행벡터"></a>행행렬(row matrix) = 행벡터</h4><p>아래 벡터는 한 줄로 되어 있습니다. 즉, 행벡터겠죠.</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">x</span>, y, <span class="number">1</span>)</span></span><br></pre></td></tr></table></figure>
+<p>1행 x 3열 -&gt; <font color="green"><strong>1</strong> x <strong>3</strong> </font>행벡터입니다.</p>
+<h4 id="열행렬-column-matrix-열벡터"><a href="#열행렬-column-matrix-열벡터" class="headerlink" title="열행렬(column matrix) = 열벡터"></a>열행렬(column matrix) = 열벡터</h4><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">x</span>)</span></span><br><span class="line"><span class="list">(<span class="keyword">y</span>)</span></span><br><span class="line"><span class="list">(<span class="keyword">z</span>)</span></span><br></pre></td></tr></table></figure>
+<p>3행 x 1열 -&gt; <font color="green"><strong>3</strong> x <strong>1</strong> </font> 열벡터입니다.</p>
+<h3 id="B-벡터와-행렬-연산"><a href="#B-벡터와-행렬-연산" class="headerlink" title="B. 벡터와 행렬 연산"></a>B. 벡터와 행렬 연산</h3><hr>
+<p>행렬 차수가 같아야 행렬연산이 가능합니다.  </p>
+<font color="red">마주보는 차수</font>가 같으면 행렬 연산이 가능하고,<br>양 끝 차수가 합쳐져서 <font color="green">결과 행렬의 차수</font>가 됩니다.<br><br><font color="green">1</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">3</font> = <font color="green">1 x 3</font>
+
+
+<h4 id="행벡터-연산"><a href="#행벡터-연산" class="headerlink" title="행벡터 연산"></a>행벡터 연산</h4><hr>
+<ul>
+<li><font color="green">1</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">3</font> = <font color="green">1 x 3</font>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">V</th>
+<th style="text-align:center">*</th>
+<th style="text-align:center">TM</th>
+<th style="text-align:center">=</th>
+<th style="text-align:center">V’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(<font color="red">x, y, 1</font>)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(<font color="red">m00</font>, m01, m02)</td>
+<td style="text-align:center">=</td>
+<td style="text-align:center">(x’, y’, 1’)</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">m10</font>, m11, m12)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">m20</font>, m21, m22)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>x’ = <font color="red">x <em> m00 + y </em> m10 + 1 <em> m20</em></font>;<br>y’ = x  m01 + y <em> m11 + 1 </em> m21;<br>1’ = x <em> m02 + y </em> m12 + 1 * m22;<br>(m02 = 0, m12 = 0, m22 = 1 따라서 1’ = 1)</p>
+<p><strong>V * TM = V’</strong> (<font color="red">x * m00</font>)<br>행벡터 연산은 우측에 곱해집니다. </p>
+<h4 id="열벡터-연산"><a href="#열벡터-연산" class="headerlink" title="열벡터 연산"></a>열벡터 연산</h4><hr>
+<ul>
+<li><font color="green">3</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">1</font> = <font color="green">3 x 1</font>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">TM</th>
+<th style="text-align:center">*</th>
+<th style="text-align:center">V</th>
+<th style="text-align:center">=</th>
+<th style="text-align:center">V’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(<font color="red">m00, m01, m02</font>)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(<font color="red">x</font>)</td>
+<td style="text-align:center">=</td>
+<td style="text-align:center">(x’, y’, 1’)</td>
+</tr>
+<tr>
+<td style="text-align:center">(m10, m11, m12)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">y</font>)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">(m20, m21, m22)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">1</font>)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>x’ = <font color="red">m00 <em> x + m01 </em> y + m02 <em> 1</em></font>;<br>y’ = m10  x + m11 <em> y + m12 </em> 1;<br>1’ = m20 <em> x + m21 </em> y + m22 * 1;<br>(m20 = 0, m21 = 0, m22 = 1 따라서 1’ = 1)</p>
+<p><strong>TM * V = V’</strong> (<font color="red">m00 * x</font>)<br>열벡터 연산은 좌측에 곱해집니다.<br>즉, 행벡터 연산과 열벡터 연산은 다른 결과가 나오겠죠.</p>
+<p><strong>AB ≠ BA</strong><br>행렬의 기본성질 중에서 ‘행렬의 곱은 교환법칙이 성립하지 않는다.’와 관련이 있겠네요.</p>
+<h3 id="C-행렬의-기본-성질"><a href="#C-행렬의-기본-성질" class="headerlink" title="C. 행렬의 기본 성질"></a>C. 행렬의 기본 성질</h3><hr>
+<ul>
+<li>AB ≠ BA</li>
+<li>A(BC) = (AB)C</li>
+<li>AI = IA = A</li>
+<li>(A-1) * A = I  <ul>
+<li>A-1 = 역행렬  </li>
+<li>I(idntity) = 단위행렬</li>
+</ul>
+</li>
+</ul>
+<h3 id="D-아핀-변환-Affine-Transform"><a href="#D-아핀-변환-Affine-Transform" class="headerlink" title="D. 아핀 변환 (Affine Transform)"></a>D. 아핀 변환 (Affine Transform)</h3><hr>
+<p>아핀 변환은 ‘이동, 크기변환, 회전, 기울리기’를 하나의 행렬로 처리하기 위한 개념입니다.<br>고등학교 교과서, 그래픽스 서적은 대부분 열벡터 연산을 기준으로 설명합니다. 저도 열벡터 연산을 기준으로 진행해 볼께요.  </p>
+<h4 id="변환-행렬-Transform-Matrix-TM"><a href="#변환-행렬-Transform-Matrix-TM" class="headerlink" title="변환 행렬 (Transform Matrix, TM)"></a>변환 행렬 (Transform Matrix, TM)</h4><hr>
+<p>아핀 변환 행렬은 3x3 구조로 정의합니다.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png" width="200" style="margin:0;padding:0"></p>
+<p>변환 행렬(TM)과 열벡터의 행렬곱<br>차수를 맞추기 위해  열벡터에 1을 추가합니다.  (x, y, <font color="red">1</font>)</p>
+<font color="green">3</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">1</font> = <font color="green">3 x 1</font>  
+
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262253/20c11e04-b96a-11e5-91ba-1f04b4bca31e.png" width="300" style="margin:0;padding:0"></p>
+<p>열벡터 연산은 아래와 같이 이루어집니다. (x -&gt; x’)<br><img src="https://cloud.githubusercontent.com/assets/6646861/12262252/20aefe7c-b96a-11e5-95d4-5fb284e02be5.png" width="300" style="margin:0;padding:0"></p>
+<p>열벡터 연산은 좌측에 우측으로 곱한다고 했죠? (수학 교과서 방식)<br>간단히 표기하면,</p>
+<p><strong>TM * P = P’</strong><br>(TM: Transform Matrix, P: Point)</p>
+<p>각각의 변환을 개별적으로 알아보고, 마지막에 변환들을 합성해 보겠습니다.<br>예제는 HTML 캔버스를 이용하여 구현해 봅시다.</p>
+<h4 id="캔버스-변환-Canvas-Transform"><a href="#캔버스-변환-Canvas-Transform" class="headerlink" title="캔버스 변환 (Canvas Transform)"></a>캔버스 변환 (Canvas Transform)</h4><hr>
+<p>HTML5 캔버스는 아핀 변환을 넣을 수 있는 인터페이스가 있습니다. </p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png" width="200" style="margin:0;padding:0"><br><strong>context.transform(a, b, c, d, tx, ty);</strong><br>(a, b, c, d, tx, ty 순서로 파마메터를 넣어주는 방식)</p>
+<h5 id="1-이동-Translate"><a href="#1-이동-Translate" class="headerlink" title="1. 이동 (Translate)"></a>1. 이동 (Translate)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262251/20aac442-b96a-11e5-81c0-b9b13de69a3a.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>T * P = P’</strong><br>(T: Translate)</p>
+<p>50크기의 박스에 아핀 변환을 적용해 보죠. (그리드 한 칸: 50)  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">context.transform(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262461/7b21ac50-b96b-11e5-96cd-4d7888b8486b.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="2-크기-Scale"><a href="#2-크기-Scale" class="headerlink" title="2. 크기 (Scale)"></a>2. 크기 (Scale)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262249/20a63418-b96a-11e5-9725-e19acd0798b3.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>S * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">context.transform(<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262463/7b2683c4-b96b-11e5-81d7-3b946f87900e.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="3-회전-Rotate"><a href="#3-회전-Rotate" class="headerlink" title="3. 회전 (Rotate)"></a>3. 회전 (Rotate)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262250/20a82b38-b96a-11e5-942e-2a3d0c8da8cd.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>R * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>,</span><br><span class="line">        cosA = <span class="built_in">Math</span>.cos(A),</span><br><span class="line">        sinA = <span class="built_in">Math</span>.sin(A); </span><br><span class="line"> </span><br><span class="line">context.transform(cosA, sinA, -sinA, cosA, <span class="number">0</span>, <span class="number">0</span>); </span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262462/7b22c5ae-b96b-11e5-9067-4f441cd42cf8.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="4-기울이기-Skew-or-Shear"><a href="#4-기울이기-Skew-or-Shear" class="headerlink" title="4. 기울이기 (Skew or Shear)"></a>4. 기울이기 (Skew or Shear)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262248/20a5656a-b96a-11e5-89c7-56459787c865.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>SH * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>,</span><br><span class="line">    tanA = <span class="built_in">Math</span>.tan(A); </span><br><span class="line"> </span><br><span class="line">context.transform(<span class="number">1</span>, <span class="number">0</span>, tanA, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>); </span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262460/7b1a8646-b96b-11e5-836c-68fe87e416c5.png" width="500" style="margin:0;padding:0"></p>
+<h4 id="5-결합-Composite"><a href="#5-결합-Composite" class="headerlink" title="5. 결합 (Composite)"></a>5. 결합 (Composite)</h4><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png" width="500" style="margin:0;padding:0"></p>
+<p>지금까지 했던 변환을 결합해 봅시다.</p>
+<p><code>SH * R * S * T * P = P&#39;</code></p>
+<p><strong>SH * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> Matrix2D();</span><br><span class="line">m = m.translate(<span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">m = m.scale(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">m = m.rotate(<span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>);</span><br><span class="line">m = m.skew(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">context.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png" width="500" style="margin:0;padding:0"></p>
+<h3 id="변환-행렬을-사용하는-이유"><a href="#변환-행렬을-사용하는-이유" class="headerlink" title="변환 행렬을 사용하는 이유?"></a>변환 행렬을 사용하는 이유?</h3><p>사각형을 변환하는 예제를 살펴봤는데요.<br>실제로는 사각형을 구성하는 4개의 꼭지점(Vertex) 좌표를 변환한 겁니다.</p>
+<p><strong>TM * P = P’</strong><br><strong>P -&gt; TM -&gt; P’</strong>  </p>
+<p>예를들어, 3D 모델이 수천개의 정점(Vertex)으로 구성되었다면,<br>수천개의 정점에 TM을 곱해주면 수천개의 변환 좌표를 한방에 구할 수있습니다.<br>또한, 모델의 원본 좌표(P)는 변하지 않아서 재사용이 가능하죠.<br>3D에서 P’는 3D 좌표를 스크린에 투영(project)하기 위해 변환한 2D 좌표입니다.</p>
+<h2 id="2-Matrix3D"><a href="#2-Matrix3D" class="headerlink" title="2. Matrix3D"></a>2. Matrix3D</h2><p>(작성중)</p>
+<hr>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/affine/">affine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/matrix/">matrix</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-Vector" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/dev/2016/01/03/Vector/">Vector</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/dev/2016/01/03/Vector/" class="article-date">
+  <time datetime="2016-01-03T10:12:41.000Z" itemprop="datePublished">2016-01-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/dev/categories/math/">math</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.</p>
+<p><img width="500" alt="vector-thumb" src="https://cloud.githubusercontent.com/assets/6646861/12254936/c03c230e-b931-11e5-8268-20405fd88642.png" style="margin:0;padding:0"></p>
+<ul>
+<li><strong>선형대수학</strong><ul>
+<li>수 대신 문자(대수)를 사용한 방정식과 기하학의 만남</li>
+<li>점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-스칼라와-벡터의-정의"><a href="#1-스칼라와-벡터의-정의" class="headerlink" title="1. 스칼라와 벡터의 정의"></a>1. 스칼라와 벡터의 정의</h2><p>스칼라와 벡터의 차이는 방향 유무에 있다.</p>
+<ul>
+<li>스칼라는 방향이 없고 크기만 가진 값이다.</li>
+<li>벡터는 크기와 방향을 모두 가진 값이다.</li>
+</ul>
+<h2 id="2-벡터-Orgin-carrier-gt-Latin-vector"><a href="#2-벡터-Orgin-carrier-gt-Latin-vector" class="headerlink" title="2. 벡터(Orgin: carrier -&gt; Latin: vector)"></a>2. 벡터(Orgin: carrier -&gt; Latin: vector)</h2><p>실수를 순서쌍(tuple)로 구성한 수의 체계(유리수, 무리수, 허수와 같은 수의 한 체개)  </p>
+<p><img width="500" alt="vector-carrier" src="https://cloud.githubusercontent.com/assets/6646861/12255944/81ec1950-b93c-11e5-95dc-4092e9d1bf88.png" style="margin:0;padding:0"></p>
+<h3 id="벡터의-크기와-방향"><a href="#벡터의-크기와-방향" class="headerlink" title="벡터의 크기와 방향"></a>벡터의 크기와 방향</h3><h4 id="벡터-방향"><a href="#벡터-방향" class="headerlink" title="벡터 방향"></a>벡터 방향</h4><ul>
+<li>화살표 시각화</li>
+<li>좌표 공간에 따라 2/3차원 표현</li>
+<li>같은 크기와 방향이면 동일한 벡터</li>
+<li>좌표 원점을 기준으로 점의 위치 표시</li>
+<li>벡터 = 끝점 위치 - 시작점 위치</li>
+<li><code>vec2(3-1, 4-1) = vec2(2, 3)</code></li>
+<li>벡터 = 변화 혹은 변위(시작점과 끝점 차이)</li>
+<li>0 벡터 = 변화 없음</li>
+</ul>
+<h4 id="벡터-크기"><a href="#벡터-크기" class="headerlink" title="벡터 크기"></a>벡터 크기</h4><ul>
+<li>끝점과 사작점 사이 거리 = 크기 (∥A∥)</li>
+<li>크기는 피타고라스 정리로 구함 (a^2 + b^2 = c^2)</li>
+<li><code>var dist = Math.sqrt(x*x + y*y)</code></li>
+<li>벡터 각 성분을 크기로 나누면 단위 벡터 (정규화 과정)</li>
+<li><code>(3, 4) -&gt; norm(3/5, 4/5) -&gt; (0.6, 0.8)</code></li>
+<li>단위 벡터: 방향은 그대로 크기가 1인 벡터 (방향 벡터)</li>
+<li>단위 벡터 = 벡터의 방향</li>
+<li>단위 벡터 * 스칼라(크기) = 원래 벡터</li>
+<li>단위 벡터는 벡터 방향만 구할 때 사용</li>
+<li><code>vec2(0.6*5, 0.8*5) = vec2(3, 4)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> dist = <span class="built_in">Math</span>.sqrt(x*x + y*y);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(x, y); <span class="comment">// 3, 4</span></span><br><span class="line"><span class="built_in">console</span>.log(dist); <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Normalize"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nx = x/dist;</span><br><span class="line"><span class="keyword">var</span> ny = y/dist;</span><br><span class="line"><span class="keyword">var</span> ndist = <span class="built_in">Math</span>.sqrt(nx*nx + ny*ny);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nx, ny); <span class="comment">// 0.6, 0.8</span></span><br><span class="line"><span class="built_in">console</span>.log(ndist);  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Restore"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(nx*dist, ny*dist); <span class="comment">// 3, 4</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-벡터-연산"><a href="#3-벡터-연산" class="headerlink" title="3. 벡터 연산"></a>3. 벡터 연산</h2><h3 id="벡터-합"><a href="#벡터-합" class="headerlink" title="벡터 합"></a>벡터 합</h3><ul>
+<li>A, B 두 벡터 합</li>
+<li>B 시작점을 A 끝점에 연결 (반대도 가능)</li>
+<li>A 시작점과 B 끝점을 연결 (A + B)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x + B.x, A.y + B.y);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-차"><a href="#벡터-차" class="headerlink" title="벡터 차"></a>벡터 차</h3><ul>
+<li>A, B 두 벡터 차</li>
+<li>B 벡터 방향을 반대로 하고 벡터 합 (A + -B)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x - B.x, A.y - B.y);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-스칼라-곱"><a href="#벡터-스칼라-곱" class="headerlink" title="벡터 스칼라 곱"></a>벡터 스칼라 곱</h3><ul>
+<li>A 벡터 스칼라 곱</li>
+<li>벡터 크기에 영향</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec2</span>(A.x * Scalar, A.y * Scalar);</span><br></pre></td></tr></table></figure>
+<h3 id="벡터-내적-dot-product"><a href="#벡터-내적-dot-product" class="headerlink" title="벡터 내적(dot product)"></a>벡터 내적(dot product)</h3><ul>
+<li>A, B 벡터 내적 (A ● B)</li>
+<li>내적 결과는 스칼라 값(스칼라적)</li>
+<li>A, B 벡터 각 x, y 성분을 곱을 더한 결과</li>
+<li>A가 B 벡터에 투영된 길이 (B는 단위 벡터)</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">스칼라 = A.x*B.x + A.y*B.y; <span class="comment">// 2차원 내적</span></span><br><span class="line">스칼라 = A.x*B.x + A.y*B.y + A.z*B.z; <span class="comment">// 3차원 내적</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>A ● B = 0, A와 B는 직교(ㅗ)</li>
+<li>A ● B &lt; 0 (음수), θ &gt; 90도 </li>
+<li>A ● B &gt; 0 (양수), θ &lt; 90도</li>
+<li>A ● B = ∥A∥∥B∥cosθ</li>
+<li>내적과 두 벡터 크기로 두 벡터 사이각 구함</li>
+</ul>
+<h3 id="벡터-외적-cross-product"><a href="#벡터-외적-cross-product" class="headerlink" title="벡터 외적(cross product)"></a>벡터 외적(cross product)</h3><ul>
+<li>A, B 벡터 외적 (A * B = C)</li>
+<li>외적 결과는 3차원 벡터 (벡터적)</li>
+<li>결과 벡터는 A, B 벡터와 직교하는 C 벡터(x,y,z)</li>
+<li>표면 법선(surface normal) 계산</li>
+</ul>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vec3</span>(A.y*B.z - A.z*B.y,  <span class="comment">// x</span></span><br><span class="line">	 A.z*B.x - A.x*B.z,  <span class="comment">// y</span></span><br><span class="line">	 A.x*B.y - A.y*B.x); <span class="comment">// z</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-참고"><a href="#4-참고" class="headerlink" title="4. 참고"></a>4. 참고</h3><h5 id="네이버-지식백과-대수학-代數學-algebra"><a href="#네이버-지식백과-대수학-代數學-algebra" class="headerlink" title="네이버 지식백과 - 대수학(代數學, algebra)"></a><a href="http://terms.naver.com/entry.nhn?docId=2098120&amp;categoryId=44413&amp;cid=44413" target="_blank" rel="external">네이버 지식백과 - 대수학(代數學, algebra)</a></h5><blockquote>
+<p>대수학(代數學, algebra)은 수 대신에 문자를 사용하여 방정식의 풀이 방법이나 대수적 구조를 연구하는 학문</p>
+</blockquote>
+<h5 id="네이버-지식백과-선형대수학-線型代數學-linear-algebra"><a href="#네이버-지식백과-선형대수학-線型代數學-linear-algebra" class="headerlink" title="네이버 지식백과 - 선형대수학(線型代數學, linear algebra)"></a><a href="http://terms.naver.com/entry.nhn?docId=2164903&amp;cid=44413&amp;categoryId=44413#TABLE_OF_CONTENT2" target="_blank" rel="external">네이버 지식백과 - 선형대수학(線型代數學, linear algebra)</a></h5><blockquote>
+<p>주어진 문제들을 추상화(abstraction)시켜 복잡한 문제를 정확하고 효율적으로 해결할 수 있는 방법론</p>
+</blockquote>
 
       
     </div>
     
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/cross/">cross</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/dot/">dot</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-Markup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/dev/2015/12/31/Markup/">Markup</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/dev/2015/12/31/Markup/" class="article-date">
+  <time datetime="2015-12-30T17:05:04.000Z" itemprop="datePublished">2015-12-31</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/dev/categories/markup/">markup</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>마크업을 제대로 이해하려면 CSS 속성을 파헤쳐야 한다. 파파박</p>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h3><ol>
+<li>display: inline<ul>
+<li>기본값</li>
+<li>magin/padding - top/bottom 불가능</li>
+<li>컨텐트에 따라 크기 유동적</li>
+<li>텍스트 표현에 주로 사용 (font-family, color, style..)</li>
+<li>엘리먼트: b, u, strong..</li>
+</ul>
+</li>
+<li>display: block<ul>
+<li>magin/padding - top/bottom 가능</li>
+<li>with 없으면 브라우저 가로 사이즈에 가득 체워짐</li>
+<li>엘리먼트: div, p, ol, ul, li</li>
+</ul>
+</li>
+<li>display: inline-block<ul>
+<li>inline + block</li>
+<li>컨텐트에 따라 크기 유동적 + magin/padding - top/bottom 가능</li>
+<li>텍스트 앞 뒤의 아이콘 (페이지 번호 등)</li>
+</ul>
+</li>
+<li>display: none<ul>
+<li>invisible  </li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">display: inline</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"border:1px solid black"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">style</span>=<span class="value">"display:inline;margin:10px;padding:10px;border:1px solid red"</span>&gt;</span>인라인<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">display: block</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"border:1px solid black"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">style</span>=<span class="value">"display:block;margin:10px;padding:10px;border:1px solid red"</span>&gt;</span>블록<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">display: inline-block</span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"border:1px solid black"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">style</span>=<span class="value">"display:inline-block;margin:10px;padding:10px;border:1px solid red"</span>&gt;</span>인라인 블록<span class="tag">&lt;/<span class="title">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="display-inline"><a href="#display-inline" class="headerlink" title="display: inline"></a>display: inline</h4><div style="border:1px solid black"><span style="display:inline;margin:10px;padding:10px;border:1px solid red">인라인</span></div>
+
+<h4 id="display-block"><a href="#display-block" class="headerlink" title="display: block"></a>display: block</h4><div style="border:1px solid black"><span style="display:block;margin:10px;padding:10px;border:1px solid red">블록</span></div>
+
+<h4 id="display-inline-block"><a href="#display-inline-block" class="headerlink" title="display: inline-block"></a>display: inline-block</h4><div style="border:1px solid black"><span style="display:inline-block;margin:10px;padding:10px;border:1px solid red">인라인 블록</span></div>
+
+<h3 id="Float"><a href="#Float" class="headerlink" title="Float"></a>Float</h3><ul>
+<li>CSS 포지셔닝 속성</li>
+<li>레이아웃 구성 및 정렬 역할</li>
+<li>inline-block과 유사</li>
+<li>inline-block은 엘리먼트 사이 공백이 삽입되어 크로스 브라우징 이슈가 있어 float 사용</li>
+<li>float을 끊어주는 방법은 clear: both / left / right</li>
+<li>clear는 다음 엘리먼트를 위해 필수</li>
+</ul>
+<ol>
+<li>float: left</li>
+<li>float: right</li>
+<li>float: none</li>
+</ol>
+<h4 id="clear-방법"><a href="#clear-방법" class="headerlink" title="clear 방법"></a>clear 방법</h4><ul>
+<li>마지막에 빈 div에 clear:both 추가 </li>
+<li>마지막 엘리먼트에 :after로 clear:both 지정</li>
+<li>parent - display:inline-block 지정</li>
+<li>parent - overflow:hidden 지정</li>
+</ul>
+<h4 id="display-inline-block-1"><a href="#display-inline-block-1" class="headerlink" title="display: inline-block"></a>display: inline-block</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:inline-block;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"display:inline-block;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"display:inline-block;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="display:inline-block;width:50px;height:50px;background-color:#ff0000"></div> <div style="display:inline-block;width:50px;height:50px;background-color:#00ff00"></div> <div style="display:inline-block;width:50px;height:50px;background-color:#0000ff"></div>
+
+<p>태그 줄바꿈을 하지 않으면 공백을 없앨 수 있다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:inline-block;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"display:inline-block;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"display:inline-block;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>VS.</p>
+<h4 id="float-left"><a href="#float-left" class="headerlink" title="float: left"></a>float: left</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"float:left;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="float:left;width:50px;height:50px;background-color:#ff0000"></div><div style="float:left;width:50px;height:50px;background-color:#00ff00"></div><div style="float:left;width:50px;height:50px;background-color:#0000ff"></div><div style="clear:both"></div>
+
+<h4 id="float-clear-방법"><a href="#float-clear-방법" class="headerlink" title="float - clear 방법"></a>float - clear 방법</h4><ul>
+<li>마지막에 빈 div에 clear:both 추가 </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"float:left;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"clear:both"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>parent - overflow:hidden 지정</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"overflow:hidden"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#ff0000"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>parent - display:inline-block 지정</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"display:inline-block"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#ff0000"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"float:left;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h3><h4 id="1-postion-static"><a href="#1-postion-static" class="headerlink" title="1. postion: static"></a>1. postion: static</h4><ul>
+<li>기본값</li>
+<li>div 쌓이는 방식으로 배치</li>
+<li>top, left, right, bottom 불가능</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"position:static;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"position:static;width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"position:static;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- or --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#ff0000"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#00ff00"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="position:static;width:50px;height:50px;background-color:#ff0000"></div><div style="position:static;width:50px;height:50px;background-color:#00ff00"></div><div style="position:static;width:50px;height:50px;background-color:#0000ff"></div>
+
+<h4 id="2-position-relative"><a href="#2-position-relative" class="headerlink" title="2. position: relative"></a>2. position: relative</h4><ul>
+<li>상대좌표</li>
+<li>div 쌓이는 방식으로 배치</li>
+<li>top, left, right, bottom, z-index 가능</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"position:relative;width:50px;height:50px;background-color:#ff0000"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"position:relative;width:50px;height:50px;background-color:#00ff00;left:50px;"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"position:relative;width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="position:relative;width:50px;height:50px;background-color:#ff0000"></div><div style="position:relative;width:50px;height:50px;background-color:#00ff00;left:50px;"></div><div style="position:relative;width:50px;height:50px;background-color:#0000ff"></div>
+
+<h4 id="3-position-absolute"><a href="#3-position-absolute" class="headerlink" title="3. position: absolute"></a>3. position: absolute</h4><ul>
+<li>절대좌표</li>
+<li>div 절대좌표로 배치 (쌓이는 방식 X)</li>
+<li>top, left, right, bottom, z-index 가능</li>
+<li>주변 엘리먼트에 영향을 주지 않고 독립적</li>
+<li>parent = relative, absolute, fixed -&gt; 영향 받음</li>
+<li>parent = static -&gt; 영향 받지 않음</li>
+<li>parent = static, parent.parent != static -&gt; 영향 받음</li>
+</ul>
+<p>e.g. parent = relative, absolute, fixed</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"position:relative"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#ff0000"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#00ff00;position:absolute;top:0;left:0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="position:relative"><div style="width:50px;height:50px;background-color:#ff0000"></div><div style="width:50px;height:50px;background-color:#00ff00;position:absolute;top:0;left:0"></div><div style="width:50px;height:50px;background-color:#0000ff"></div></div>
+
+<p>e.g. parent = static, parent.parent != static</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=<span class="string">"position:relative"</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"position: static"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#ff0000"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#00ff00;position:absolute;top:0;left:0"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">style</span>=<span class="value">"width:50px;height:50px;background-color:#0000ff"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<div style="position:relative"><div style="position: static"><div style="width:50px;height:50px;background-color:#ff0000"></div><div style="width:50px;height:50px;background-color:#00ff00;position:absolute;top:0;left:0"></div><div style="width:50px;height:50px;background-color:#0000ff"></div></div></div>
+
+<h4 id="4-position-fixed"><a href="#4-position-fixed" class="headerlink" title="4. position: fixed"></a>4. position: fixed</h4><ul>
+<li>브라우저 스크롤 시 위치 고정</li>
+<li>주변 엘리먼트에 영향을 주지 않음</li>
+<li>top, left, right, bottom, z-index 가능</li>
+<li>parent 무시</li>
+</ul>
+<h3 id="Z-index"><a href="#Z-index" class="headerlink" title="Z-index"></a>Z-index</h3><ul>
+<li>엘리먼트의 우선순위(z-index:0)</li>
+<li>나중에 추가한 요소가 위에 위치</li>
+<li>position: static 아닌 경우만 사용</li>
+</ul>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/display/">display</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/float/">float</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/postion/">postion</a></li></ul>
+
+      </footer>
     
   </div>
   

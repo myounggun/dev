@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Matrix - Myoung Chae</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="벡터에 대해 이해했다면 2D/3D 행렬, 벡터와 행렬 연산, 아핀 변환에 대해 알아보자.  
+
+1. Matrix2D3D 프로그래밍에서 벡터와 행렬에 대한 이해는 필수입니다.객체의 2D 변환(이동, 크기조절, 회전, 기울리기)에 대해 살펴볼께요.보통 ‘아핀 변환’이라고 불리우는 중요한 개념입니다.
+A. 벡터의 행렬 표현
+행행렬(row matrix) = 행벡터">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matrix">
+<meta property="og:url" content="http://myounggun.github.io/dev/2016/01/04/Matrix/index.html">
+<meta property="og:site_name" content="Myoung Chae">
+<meta property="og:description" content="벡터에 대해 이해했다면 2D/3D 행렬, 벡터와 행렬 연산, 아핀 변환에 대해 알아보자.  
+
+1. Matrix2D3D 프로그래밍에서 벡터와 행렬에 대한 이해는 필수입니다.객체의 2D 변환(이동, 크기조절, 회전, 기울리기)에 대해 살펴볼께요.보통 ‘아핀 변환’이라고 불리우는 중요한 개념입니다.
+A. 벡터의 행렬 표현
+행행렬(row matrix) = 행벡터">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12264019/0aa91efc-b977-11e5-83a0-529b1f59b427.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262253/20c11e04-b96a-11e5-91ba-1f04b4bca31e.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262252/20aefe7c-b96a-11e5-95d4-5fb284e02be5.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262251/20aac442-b96a-11e5-81c0-b9b13de69a3a.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262461/7b21ac50-b96b-11e5-96cd-4d7888b8486b.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262249/20a63418-b96a-11e5-9725-e19acd0798b3.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262463/7b2683c4-b96b-11e5-81d7-3b946f87900e.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262250/20a82b38-b96a-11e5-942e-2a3d0c8da8cd.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262462/7b22c5ae-b96b-11e5-9067-4f441cd42cf8.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262248/20a5656a-b96a-11e5-89c7-56459787c865.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262460/7b1a8646-b96b-11e5-836c-68fe87e416c5.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png">
+<meta property="og:updated_time" content="2016-02-26T11:32:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Matrix">
+<meta name="twitter:description" content="벡터에 대해 이해했다면 2D/3D 행렬, 벡터와 행렬 연산, 아핀 변환에 대해 알아보자.  
+
+1. Matrix2D3D 프로그래밍에서 벡터와 행렬에 대한 이해는 필수입니다.객체의 2D 변환(이동, 크기조절, 회전, 기울리기)에 대해 살펴볼께요.보통 ‘아핀 변환’이라고 불리우는 중요한 개념입니다.
+A. 벡터의 행렬 표현
+행행렬(row matrix) = 행벡터">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/dev/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/dev/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/dev/css/style.css" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/dev/">Home</a>
+        
+          <a class="main-nav-link" href="/dev/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/dev/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/dev/tags">Tags</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://myounggun.github.io/dev"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Matrix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Matrix
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/dev/2016/01/04/Matrix/" class="article-date">
+  <time datetime="2016-01-04T10:22:31.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/dev/categories/math/">math</a>
+  </div>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>벡터에 대해 이해했다면 2D/3D 행렬, 벡터와 행렬 연산, 아핀 변환에 대해 알아보자.  </p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12264019/0aa91efc-b977-11e5-83a0-529b1f59b427.png" width="500" style="margin:0;padding:0"></p>
+<h2 id="1-Matrix2D"><a href="#1-Matrix2D" class="headerlink" title="1. Matrix2D"></a>1. Matrix2D</h2><p>3D 프로그래밍에서 벡터와 행렬에 대한 이해는 필수입니다.<br>객체의 2D 변환(이동, 크기조절, 회전, 기울리기)에 대해 살펴볼께요.<br>보통 ‘아핀 변환’이라고 불리우는 중요한 개념입니다.</p>
+<h3 id="A-벡터의-행렬-표현"><a href="#A-벡터의-행렬-표현" class="headerlink" title="A. 벡터의 행렬 표현"></a>A. 벡터의 행렬 표현</h3><hr>
+<h4 id="행행렬-row-matrix-행벡터"><a href="#행행렬-row-matrix-행벡터" class="headerlink" title="행행렬(row matrix) = 행벡터"></a>행행렬(row matrix) = 행벡터</h4><p>아래 벡터는 한 줄로 되어 있습니다. 즉, 행벡터겠죠.</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">x</span>, y, <span class="number">1</span>)</span></span><br></pre></td></tr></table></figure>
+<p>1행 x 3열 -&gt; <font color="green"><strong>1</strong> x <strong>3</strong> </font>행벡터입니다.</p>
+<h4 id="열행렬-column-matrix-열벡터"><a href="#열행렬-column-matrix-열벡터" class="headerlink" title="열행렬(column matrix) = 열벡터"></a>열행렬(column matrix) = 열벡터</h4><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">x</span>)</span></span><br><span class="line"><span class="list">(<span class="keyword">y</span>)</span></span><br><span class="line"><span class="list">(<span class="keyword">z</span>)</span></span><br></pre></td></tr></table></figure>
+<p>3행 x 1열 -&gt; <font color="green"><strong>3</strong> x <strong>1</strong> </font> 열벡터입니다.</p>
+<h3 id="B-벡터와-행렬-연산"><a href="#B-벡터와-행렬-연산" class="headerlink" title="B. 벡터와 행렬 연산"></a>B. 벡터와 행렬 연산</h3><hr>
+<p>행렬 차수가 같아야 행렬연산이 가능합니다.  </p>
+<font color="red">마주보는 차수</font>가 같으면 행렬 연산이 가능하고,<br>양 끝 차수가 합쳐져서 <font color="green">결과 행렬의 차수</font>가 됩니다.<br><br><font color="green">1</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">3</font> = <font color="green">1 x 3</font>
+
+
+<h4 id="행벡터-연산"><a href="#행벡터-연산" class="headerlink" title="행벡터 연산"></a>행벡터 연산</h4><hr>
+<ul>
+<li><font color="green">1</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">3</font> = <font color="green">1 x 3</font>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">V</th>
+<th style="text-align:center">*</th>
+<th style="text-align:center">TM</th>
+<th style="text-align:center">=</th>
+<th style="text-align:center">V’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(<font color="red">x, y, 1</font>)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(<font color="red">m00</font>, m01, m02)</td>
+<td style="text-align:center">=</td>
+<td style="text-align:center">(x’, y’, 1’)</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">m10</font>, m11, m12)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">m20</font>, m21, m22)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>x’ = <font color="red">x <em> m00 + y </em> m10 + 1 <em> m20</em></font>;<br>y’ = x  m01 + y <em> m11 + 1 </em> m21;<br>1’ = x <em> m02 + y </em> m12 + 1 * m22;<br>(m02 = 0, m12 = 0, m22 = 1 따라서 1’ = 1)</p>
+<p><strong>V * TM = V’</strong> (<font color="red">x * m00</font>)<br>행벡터 연산은 우측에 곱해집니다. </p>
+<h4 id="열벡터-연산"><a href="#열벡터-연산" class="headerlink" title="열벡터 연산"></a>열벡터 연산</h4><hr>
+<ul>
+<li><font color="green">3</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">1</font> = <font color="green">3 x 1</font>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">TM</th>
+<th style="text-align:center">*</th>
+<th style="text-align:center">V</th>
+<th style="text-align:center">=</th>
+<th style="text-align:center">V’</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(<font color="red">m00, m01, m02</font>)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(<font color="red">x</font>)</td>
+<td style="text-align:center">=</td>
+<td style="text-align:center">(x’, y’, 1’)</td>
+</tr>
+<tr>
+<td style="text-align:center">(m10, m11, m12)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">y</font>)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">(m20, m21, m22)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">(<font color="red">1</font>)</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>x’ = <font color="red">m00 <em> x + m01 </em> y + m02 <em> 1</em></font>;<br>y’ = m10  x + m11 <em> y + m12 </em> 1;<br>1’ = m20 <em> x + m21 </em> y + m22 * 1;<br>(m20 = 0, m21 = 0, m22 = 1 따라서 1’ = 1)</p>
+<p><strong>TM * V = V’</strong> (<font color="red">m00 * x</font>)<br>열벡터 연산은 좌측에 곱해집니다.<br>즉, 행벡터 연산과 열벡터 연산은 다른 결과가 나오겠죠.</p>
+<p><strong>AB ≠ BA</strong><br>행렬의 기본성질 중에서 ‘행렬의 곱은 교환법칙이 성립하지 않는다.’와 관련이 있겠네요.</p>
+<h3 id="C-행렬의-기본-성질"><a href="#C-행렬의-기본-성질" class="headerlink" title="C. 행렬의 기본 성질"></a>C. 행렬의 기본 성질</h3><hr>
+<ul>
+<li>AB ≠ BA</li>
+<li>A(BC) = (AB)C</li>
+<li>AI = IA = A</li>
+<li>(A-1) * A = I  <ul>
+<li>A-1 = 역행렬  </li>
+<li>I(idntity) = 단위행렬</li>
+</ul>
+</li>
+</ul>
+<h3 id="D-아핀-변환-Affine-Transform"><a href="#D-아핀-변환-Affine-Transform" class="headerlink" title="D. 아핀 변환 (Affine Transform)"></a>D. 아핀 변환 (Affine Transform)</h3><hr>
+<p>아핀 변환은 ‘이동, 크기변환, 회전, 기울리기’를 하나의 행렬로 처리하기 위한 개념입니다.<br>고등학교 교과서, 그래픽스 서적은 대부분 열벡터 연산을 기준으로 설명합니다. 저도 열벡터 연산을 기준으로 진행해 볼께요.  </p>
+<h4 id="변환-행렬-Transform-Matrix-TM"><a href="#변환-행렬-Transform-Matrix-TM" class="headerlink" title="변환 행렬 (Transform Matrix, TM)"></a>변환 행렬 (Transform Matrix, TM)</h4><hr>
+<p>아핀 변환 행렬은 3x3 구조로 정의합니다.</p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png" width="200" style="margin:0;padding:0"></p>
+<p>변환 행렬(TM)과 열벡터의 행렬곱<br>차수를 맞추기 위해  열벡터에 1을 추가합니다.  (x, y, <font color="red">1</font>)</p>
+<font color="green">3</font> x <font color="red">3</font> * <font color="red">3</font> x <font color="green">1</font> = <font color="green">3 x 1</font>  
+
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262253/20c11e04-b96a-11e5-91ba-1f04b4bca31e.png" width="300" style="margin:0;padding:0"></p>
+<p>열벡터 연산은 아래와 같이 이루어집니다. (x -&gt; x’)<br><img src="https://cloud.githubusercontent.com/assets/6646861/12262252/20aefe7c-b96a-11e5-95d4-5fb284e02be5.png" width="300" style="margin:0;padding:0"></p>
+<p>열벡터 연산은 좌측에 우측으로 곱한다고 했죠? (수학 교과서 방식)<br>간단히 표기하면,</p>
+<p><strong>TM * P = P’</strong><br>(TM: Transform Matrix, P: Point)</p>
+<p>각각의 변환을 개별적으로 알아보고, 마지막에 변환들을 합성해 보겠습니다.<br>예제는 HTML 캔버스를 이용하여 구현해 봅시다.</p>
+<h4 id="캔버스-변환-Canvas-Transform"><a href="#캔버스-변환-Canvas-Transform" class="headerlink" title="캔버스 변환 (Canvas Transform)"></a>캔버스 변환 (Canvas Transform)</h4><hr>
+<p>HTML5 캔버스는 아핀 변환을 넣을 수 있는 인터페이스가 있습니다. </p>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262254/20c9d328-b96a-11e5-9eed-464c208a188f.png" width="200" style="margin:0;padding:0"><br><strong>context.transform(a, b, c, d, tx, ty);</strong><br>(a, b, c, d, tx, ty 순서로 파마메터를 넣어주는 방식)</p>
+<h5 id="1-이동-Translate"><a href="#1-이동-Translate" class="headerlink" title="1. 이동 (Translate)"></a>1. 이동 (Translate)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262251/20aac442-b96a-11e5-81c0-b9b13de69a3a.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>T * P = P’</strong><br>(T: Translate)</p>
+<p>50크기의 박스에 아핀 변환을 적용해 보죠. (그리드 한 칸: 50)  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">context.transform(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262461/7b21ac50-b96b-11e5-96cd-4d7888b8486b.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="2-크기-Scale"><a href="#2-크기-Scale" class="headerlink" title="2. 크기 (Scale)"></a>2. 크기 (Scale)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262249/20a63418-b96a-11e5-9725-e19acd0798b3.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>S * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">context.transform(<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262463/7b2683c4-b96b-11e5-81d7-3b946f87900e.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="3-회전-Rotate"><a href="#3-회전-Rotate" class="headerlink" title="3. 회전 (Rotate)"></a>3. 회전 (Rotate)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262250/20a82b38-b96a-11e5-942e-2a3d0c8da8cd.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>R * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>,</span><br><span class="line">        cosA = <span class="built_in">Math</span>.cos(A),</span><br><span class="line">        sinA = <span class="built_in">Math</span>.sin(A); </span><br><span class="line"> </span><br><span class="line">context.transform(cosA, sinA, -sinA, cosA, <span class="number">0</span>, <span class="number">0</span>); </span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262462/7b22c5ae-b96b-11e5-9067-4f441cd42cf8.png" width="500" style="margin:0;padding:0"></p>
+<h5 id="4-기울이기-Skew-or-Shear"><a href="#4-기울이기-Skew-or-Shear" class="headerlink" title="4. 기울이기 (Skew or Shear)"></a>4. 기울이기 (Skew or Shear)</h5><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262248/20a5656a-b96a-11e5-89c7-56459787c865.png" width="500" style="margin:0;padding:0"></p>
+<p><strong>SH * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>,</span><br><span class="line">    tanA = <span class="built_in">Math</span>.tan(A); </span><br><span class="line"> </span><br><span class="line">context.transform(<span class="number">1</span>, <span class="number">0</span>, tanA, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>); </span><br><span class="line"></span><br><span class="line">context.fillStyle = <span class="string">"#ff0000"</span>;</span><br><span class="line">context.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262460/7b1a8646-b96b-11e5-836c-68fe87e416c5.png" width="500" style="margin:0;padding:0"></p>
+<h4 id="5-결합-Composite"><a href="#5-결합-Composite" class="headerlink" title="5. 결합 (Composite)"></a>5. 결합 (Composite)</h4><p><img src="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png" width="500" style="margin:0;padding:0"></p>
+<p>지금까지 했던 변환을 결합해 봅시다.</p>
+<p><code>SH * R * S * T * P = P&#39;</code></p>
+<p><strong>SH * P = P’</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> Matrix2D();</span><br><span class="line">m = m.translate(<span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">m = m.scale(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">m = m.rotate(<span class="number">45</span> * <span class="built_in">Math</span>.PI / <span class="number">180</span>);</span><br><span class="line">m = m.skew(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">context.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);</span><br></pre></td></tr></table></figure>
+<p><img src="https://cloud.githubusercontent.com/assets/6646861/12262247/209ee3ca-b96a-11e5-8cea-57484f748346.png" width="500" style="margin:0;padding:0"></p>
+<h3 id="변환-행렬을-사용하는-이유"><a href="#변환-행렬을-사용하는-이유" class="headerlink" title="변환 행렬을 사용하는 이유?"></a>변환 행렬을 사용하는 이유?</h3><p>사각형을 변환하는 예제를 살펴봤는데요.<br>실제로는 사각형을 구성하는 4개의 꼭지점(Vertex) 좌표를 변환한 겁니다.</p>
+<p><strong>TM * P = P’</strong><br><strong>P -&gt; TM -&gt; P’</strong>  </p>
+<p>예를들어, 3D 모델이 수천개의 정점(Vertex)으로 구성되었다면,<br>수천개의 정점에 TM을 곱해주면 수천개의 변환 좌표를 한방에 구할 수있습니다.<br>또한, 모델의 원본 좌표(P)는 변하지 않아서 재사용이 가능하죠.<br>3D에서 P’는 3D 좌표를 스크린에 투영(project)하기 위해 변환한 2D 좌표입니다.</p>
+<h2 id="2-Matrix3D"><a href="#2-Matrix3D" class="headerlink" title="2. Matrix3D"></a>2. Matrix3D</h2><p>(작성중)</p>
+<hr>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3>
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/affine/">affine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/dev/tags/matrix/">matrix</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/dev/2016/01/03/Vector/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vector&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Myoung Chae&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/dev/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/dev/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/dev/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/dev/js/script.js" type="text/javascript"></script>
+  </div>
+</body>
+</html>

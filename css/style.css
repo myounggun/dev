@@ -149,13 +149,13 @@ body {
   position: relative;
 }
 .logo {
-  width: 94px;
-  height: 57px;
-  background-image: url("images/logo.png");
-  -webkit-background-size: 74px 28px;
-  -moz-background-size: 74px 28px;
-  background-size: 74px 28px;
-  background-position: left center;
+  width: 128px;
+  height: 58px;
+  background-image: url("images/mg@2x.png");
+  -webkit-background-size: 118px 58px;
+  -moz-background-size: 118px 58px;
+  background-size: 118px 58px;
+  background-position: left bottom;
   background-repeat: no-repeat;
 }
 .logo-text {
