@@ -5,54 +5,18 @@
   
   <title>Vector - Myoung Chae</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
-
-
-선형대수학
-수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
-점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
-
-
-
-1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
-
-스칼라는 방향이 없고 크기만 가진 값이다.
-벡터는 크기와 방향을 모두 가진">
+  <meta name="description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vector">
 <meta property="og:url" content="http://myounggun.github.io/dev/2016/01/03/Vector/index.html">
 <meta property="og:site_name" content="Myoung Chae">
-<meta property="og:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
-
-
-선형대수학
-수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
-점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
-
-
-
-1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
-
-스칼라는 방향이 없고 크기만 가진 값이다.
-벡터는 크기와 방향을 모두 가진">
+<meta property="og:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.">
 <meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12254936/c03c230e-b931-11e5-8268-20405fd88642.png">
 <meta property="og:image" content="https://cloud.githubusercontent.com/assets/6646861/12255944/81ec1950-b93c-11e5-95dc-4092e9d1bf88.png">
-<meta property="og:updated_time" content="2016-02-26T10:19:20.000Z">
+<meta property="og:updated_time" content="2016-02-26T17:28:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vector">
-<meta name="twitter:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.
-
-
-선형대수학
-수 대신 문자(대수)를 사용한 방정식과 기하학의 만남
-점, 선을 데카르트 좌표로 표시하고 방정식을 그래프로 시각화 가능해짐
-
-
-
-1. 스칼라와 벡터의 정의스칼라와 벡터의 차이는 방향 유무에 있다.
-
-스칼라는 방향이 없고 크기만 가진 값이다.
-벡터는 크기와 방향을 모두 가진">
+<meta name="twitter:description" content="선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.">
   
   
     <link rel="icon" href="/favicon.png">
@@ -118,6 +82,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>선형대수학(Linear algebra)의 기본인 벡터에 대해 알아보자.</p>
+<a id="more"></a>
 <p><img width="500" alt="vector-thumb" src="https://cloud.githubusercontent.com/assets/6646861/12254936/c03c230e-b931-11e5-8268-20405fd88642.png" style="margin:0;padding:0"></p>
 <ul>
 <li><strong>선형대수학</strong><ul>
@@ -202,6 +167,11 @@
 
       
     </div>
+    
+      <div class="article-toc">
+        <h3>Contents</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-스칼라와-벡터의-정의"><span class="toc-number">1.</span> <span class="toc-text">1. 스칼라와 벡터의 정의</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-벡터-Orgin-carrier-gt-Latin-vector"><span class="toc-number">2.</span> <span class="toc-text">2. 벡터(Orgin: carrier -> Latin: vector)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터의-크기와-방향"><span class="toc-number">2.1.</span> <span class="toc-text">벡터의 크기와 방향</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#벡터-방향"><span class="toc-number">2.1.1.</span> <span class="toc-text">벡터 방향</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#벡터-크기"><span class="toc-number">2.1.2.</span> <span class="toc-text">벡터 크기</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-벡터-연산"><span class="toc-number">3.</span> <span class="toc-text">3. 벡터 연산</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터-합"><span class="toc-number">3.1.</span> <span class="toc-text">벡터 합</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터-차"><span class="toc-number">3.2.</span> <span class="toc-text">벡터 차</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터-스칼라-곱"><span class="toc-number">3.3.</span> <span class="toc-text">벡터 스칼라 곱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터-내적-dot-product"><span class="toc-number">3.4.</span> <span class="toc-text">벡터 내적(dot product)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#벡터-외적-cross-product"><span class="toc-number">3.5.</span> <span class="toc-text">벡터 외적(cross product)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-참고"><span class="toc-number">3.6.</span> <span class="toc-text">4. 참고</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#네이버-지식백과-대수학-代數學-algebra"><span class="toc-number">3.6.0.1.</span> <span class="toc-text">네이버 지식백과 - 대수학(代數學, algebra)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#네이버-지식백과-선형대수학-線型代數學-linear-algebra"><span class="toc-number">3.6.0.2.</span> <span class="toc-text">네이버 지식백과 - 선형대수학(線型代數學, linear algebra)</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
     
     
       <footer class="article-footer">
